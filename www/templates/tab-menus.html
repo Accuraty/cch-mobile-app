@@ -1,0 +1,33 @@
+<ion-view view-title="Menu" class="tab-menu">
+  <ion-content overflow-scroll="true" delegate-handle="menus-delegate">
+
+  	<div ng-show="noItems" class="padding" ng-bind-html="noItems" style="text-align:center"></div>
+
+		<div ng-show="!noItems" class="menu-group" ng-repeat="(key, value) in menus | groupBy: 'date'" >
+			<ion-list>
+				<a ng-if="mealIsToday(value[0].date)" name="today" id="today"></a>
+
+				<ion-item class="item item-divider">{{getFormattedDate(value[0].date)}} <small ng-if="mealIsToday(value[0].date)" name="today" id="today">Today</small></ion-item>
+
+				<ion-item class="item-icon-right item-meal" ng-class="mealHasPassed(menu.name, menu.date) ? 'has-passed' : ''" ng-repeat="menu in value" type="item-text-wrap" nav-direction="forward" ng-href="#/tab/meal/{{menu.id}}">
+
+				  <img ng-src="{{icon(menu.name)}}" class="item-meal-icon">
+
+					<div class="item-meal-description">
+					  <div ng-switch on="menu.latePlateStatus" class="late-plate-message">
+					  	<div ng-switch-when="eligible">
+					  		<div ng-if="!latePlateDeadlineHasPassed(menu.name, menu.date)" ng-bind-html="getLatePlateMsg(menu.name, menu.date, false)" class="is-due"></div>
+					  		<div ng-if="latePlateDeadlineHasPassed(menu.name, menu.date)"class="has-expired">Late Plate orders unavailable</div>
+					  	</div>
+							<div ng-switch-when="pending" class="is-requested">Late Plate order requested</div>
+							<div ng-switch-when="complete" class="is-complete">Late Plate order complete</div>
+						</div>
+						<h2 class="item-meal-title">{{menu.entree}}</h2>
+					</div>
+
+				  <i class="icon icon-chevron-right icon-accessory"></i>
+				</ion-item>
+			</ion-list>
+		</div>
+	</ion-content>
+</ion-view>
