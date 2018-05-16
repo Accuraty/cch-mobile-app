@@ -187,7 +187,7 @@ angular.module('collegeChefs.services', ['ionic.cloud'])
 
   // 24 hour clock
   var latePlateLunchTime = 10; // no lunch late plate orders after 10am
-  var lunchEndTime = 16; // lunch ends after 2pm
+  var lunchEndTime = 14; // lunch ends after 2pm
   var latePlateDinnerTime = 15; // no dinner late plate orders after 3pm
   var dinnerEndTime = 20; // dinner ends after 8pm
 
@@ -297,6 +297,8 @@ angular.module('collegeChefs.services', ['ionic.cloud'])
             case "Dinner":
               return icon + latePlateString + dinnerEnd;
           }
+        } else {
+          return 'Late Plate orders are now closed';
         }
 
         return null;

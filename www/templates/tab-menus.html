@@ -5,27 +5,33 @@
 
 		<div ng-show="!noItems" class="menu-group" ng-repeat="(key, value) in menus | groupBy: 'date'" >
 			<ion-list>
-				<a ng-if="mealIsToday(value[0].date)" name="today" id="today"></a>
 
-				<ion-item class="item item-divider">{{getFormattedDate(value[0].date)}} <small ng-if="mealIsToday(value[0].date)" name="today" id="today">Today</small></ion-item>
+				<ion-item class="item item-divider">
+					<span ng-if="mealIsToday(value[0].date)" class="is-today">
+						{{ getFormattedDate(value[0].date) }}
+						<span name="today" id="today">Today</span>
+					</span>
+					<span ng-if="!mealIsToday(value[0].date)">
+						{{ getFormattedDate(value[0].date) }}
+					</span>
+				</ion-item>
 
-				<ion-item class="item-icon-right item-meal" ng-class="mealHasPassed(menu.name, menu.date) ? 'has-passed' : ''" ng-repeat="menu in value" type="item-text-wrap" nav-direction="forward" ng-href="#/tab/meal/{{menu.id}}">
+				<ion-item class="item-meal" ng-class="{ 'has-passed': mealHasPassed(menu.name, menu.date), 'is-complete': menu.latePlateStatus == 'complete', 'is-pending': menu.latePlateStatus == 'pending', 'is-eligible': menu.latePlateStatus == 'eligible' }" ng-repeat="menu in value" type="item-text-wrap" nav-direction="forward" ng-href="#/tab/meal/{{menu.id}}">
 
-				  <img ng-src="{{icon(menu.name)}}" class="item-meal-icon">
+				  <img ng-src="{{icon(menu.name)}}" class="item-meal-image">
 
 					<div class="item-meal-description">
 					  <div ng-switch on="menu.latePlateStatus" class="late-plate-message">
-					  	<div ng-switch-when="eligible">
-					  		<div ng-if="!latePlateDeadlineHasPassed(menu.name, menu.date)" ng-bind-html="getLatePlateMsg(menu.name, menu.date, false)" class="is-due"></div>
-					  		<div ng-if="latePlateDeadlineHasPassed(menu.name, menu.date)"class="has-expired">Late Plate orders unavailable</div>
+					  	<div ng-switch-when="eligible" ng-if="menu.name != 'Breakfast' && menu.entree.toUpperCase() != 'NO SERVICE' && showLatePlateButton(menu.name, menu.date)">
+					  		<div ng-bind-html="getLatePlateMsg(menu.name, menu.date, false)" ng-class="latePlateDeadlineHasPassed(menu.name, menu.date) ? 'has-expired' : 'is-due'"></div>
 					  	</div>
-							<div ng-switch-when="pending" class="is-requested">Late Plate order requested</div>
-							<div ng-switch-when="complete" class="is-complete">Late Plate order complete</div>
+							<div ng-switch-when="pending">Late Plate order pending</div>
+							<div ng-switch-when="complete">Late Plate order complete</div>
 						</div>
 						<h2 class="item-meal-title">{{menu.entree}}</h2>
 					</div>
 
-				  <i class="icon icon-chevron-right icon-accessory"></i>
+					<i class="icon" ng-class="{ 'icon-check-circle': menu.latePlateStatus == 'complete', 'icon-clock-solid': menu.latePlateStatus == 'pending', 'icon-chevron-right': menu.latePlateStatus == 'eligible' }"></i>
 				</ion-item>
 			</ion-list>
 		</div>

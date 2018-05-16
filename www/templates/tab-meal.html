@@ -15,7 +15,7 @@
   </ion-nav-buttons>
 
   <ion-content class="padding">
-    <div ng-if="mealHasPassed(meal.name, meal.date)" class="item item-positive" role="alert">This meal has passed.</div>
+    <div ng-if="mealHasPassed(meal.name, meal.date)" class="item item-positive" style="margin-bottom: 15px;">This meal has passed.</div>
     <div ng-show="noItems" ng-bind-html="noItems" style="text-align:center"></div>
 
     <h2>{{ meal.name }}</h2>
@@ -23,39 +23,34 @@
 
     <div ng-switch on="meal.latePlateStatus">
 
-      <!-- <div ng-switch-when="eligible" ng-if="meal.name != 'Breakfast' && meal.entree.toUpperCase() != 'NO SERVICE'"> -->
+      <div ng-switch-when="eligible" ng-if="meal.name != 'Breakfast' && meal.entree.toUpperCase() != 'NO SERVICE' && showLatePlateButton(meal.name, meal.date)">
 
-      <div ng-switch-when="eligible" ng-if="showLatePlateButton(meal.name, meal.date)">
         <div ng-if="!latePlateDeadlineHasPassed(meal.name, meal.date)">
-
-          <button type="button" class="button button-assertive request-lp" ng-click="openModal(1)">Request Late Plate</button>
+          <button type="button" class="button button-late-plate is-primary" ng-click="openModal(1)">Request Late Plate</button>
           <div class="late-plate-message">
             <span ng-bind-html="getLatePlateMsg(meal.name, meal.date, true)" class="is-due"></span>
           </div>
         </div>
-        <div ng-if="latePlateDeadlineHasPassed(meal.name, meal.date)" class="item item-light" style="margin-top: 15px;">
-            <div class="late-plate-message">
-              <span class="has-expired">The deadline to order Late Plates has expired</span>
-            </div>
+        <div ng-if="latePlateDeadlineHasPassed(meal.name, meal.date)" class="item item-light" style="margin-top: 30px;">
+          <div class="late-plate-message">
+            <span class="has-expired">The deadline to order Late Plates has expired</span>
           </div>
         </div>
       </div>
 
       <div ng-switch-when="pending">
-        <div class="alert alert-warning pending-warning-meal" role="alert">
-          <i class="icon icon-check-circle"></i> Order Pending
+        <div class="alert alert-info late-plate-status">
+          <i class="icon icon-clock-solid"></i> Order Pending
           <small>Your request has been submitted</small>
         </div>
         <div ng-if="showLatePlateButton(meal.name, meal.date)">
-          <button class="button button-assertive request-lp" ng-click="openModal(2)">Cancel Late Plate</button>
+          <button class="button button-late-plate" ng-click="openModal(2)">Cancel Late Plate</button>
         </div>
       </div>
 
-      <div ng-switch-when="complete">
-        <div class="alert alert-warning pending-warning-meal meal-complete" role="alert">
-          <i class="icon ion-happy"></i> Order Complete
-          <small>Your request has been filled</small>
-        </div>
+      <div ng-switch-when="complete" class="alert alert-success late-plate-status">
+        <i class="icon icon-check-circle"></i> Order Complete
+        <small>Your request has been filled</small>
       </div>
     </div>
   </ion-content>

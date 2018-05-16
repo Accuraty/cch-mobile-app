@@ -2,21 +2,23 @@
  * VARIABLES
  *
  * red:       #ef473a;
- * green:     #33cd5f;
+ * red-hover: #e03730;
+ *
+ * green:     #2b8838;
+ * blue:      #18a4d4;
  */
 
 @font-face {
   font-family: 'icomoon';
   src:
-    url('fonts/icomoon.ttf?bd4vpu') format('truetype'),
-    url('fonts/icomoon.woff?bd4vpu') format('woff'),
-    url('fonts/icomoon.svg?bd4vpu#icomoon') format('svg');
+    url('fonts/icomoon.ttf?jmxigd') format('truetype'),
+    url('fonts/icomoon.woff?jmxigd') format('woff'),
+    url('fonts/icomoon.svg?jmxigd#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 .icon {
-  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;
@@ -30,65 +32,68 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-list:before {
+.icon-list::before {
   content: "\f03a";
 }
-.icon-external-link:before {
+.icon-external-link::before {
   content: "\f08e";
 }
-.icon-check:before {
+.icon-check::before {
   content: "\e900";
 }
-.icon-check-circle:before {
+.icon-check-circle::before {
   content: "\e901";
 }
-.icon-chevron-left:before {
+.icon-chevron-left::before {
   content: "\e902";
 }
-.icon-chevron-right:before {
+.icon-chevron-right::before {
   content: "\e903";
 }
-.icon-clock:before {
+.icon-clock::before {
   content: "\e904";
 }
-.icon-exclamation:before {
+.icon-exclamation::before {
   content: "\e905";
 }
-.icon-exclamation-circle:before {
+.icon-exclamation-circle::before {
   content: "\e906";
 }
-.icon-gear:before {
+.icon-gear::before {
   content: "\e907";
 }
-.icon-heart:before {
+.icon-heart::before {
   content: "\e908";
 }
-.icon-minus:before {
+.icon-minus::before {
   content: "\e90a";
 }
-.icon-minus-circle:before {
+.icon-minus-circle::before {
   content: "\e90b";
 }
-.icon-plate:before {
+.icon-plate::before {
   content: "\e90c";
 }
-.icon-plus:before {
+.icon-plus::before {
   content: "\e90d";
 }
-.icon-plus-circle:before {
+.icon-plus-circle::before {
   content: "\e90e";
 }
-.icon-star:before {
+.icon-star::before {
   content: "\e90f";
 }
-.icon-strawberry:before {
+.icon-strawberry::before {
   content: "\e910";
 }
-.icon-x:before {
+.icon-x::before {
   content: "\e911";
 }
-.icon-x-circle:before {
+.icon-x-circle::before {
   content: "\e912";
+}
+.icon-clock-solid::before {
+  content: "\e94f";
 }
 
 * {
@@ -110,7 +115,9 @@
 }
 
 h2 {
-  font-size: 34px;
+  color: #222;
+  font-size: 42px;
+  margin: 0 0 10px;
 }
 
 small {
@@ -155,64 +162,40 @@ small {
 ion-item.has-passed {
     opacity: .5;
 }
-.button.request-lp {
-    width: 100%;
-    box-shadow: 2px 2px 1px #7e1713;
-    color: #faf8ed;
-    margin: 30px 0 15px;
-    padding: 15px 10px;
-    font-size: 1.25em;
-}
 
-.button.request-lp + p {
-  margin: 5px 0 0;
-}
-
-.button.request-lp + p .icon {
-  margin-right: 2px;
-  position: relative;
-  top: 1px;
-}
-
-button.button.request-lp-cancel {
-    width: 100%;
-    background: #a4a4a4;
-    color: #faf8ed;
-    padding: 10px;
-}
-.button.cancel-lp {
-    width: 50%;
-    padding: 0px !important;
-    line-height: 30px;
-    min-height: 0;
-    margin-top: 20px;
-    font-size: 14px;
-    margin-left: 55px;
-}
 .bar-dark .button {
     color: #eaec92;
 }
 .item.item-divider {
-    color: #94907a;
-    font-size: 13px;
-    font-weight: 500;
-    padding-bottom: 10px;
-    text-transform: uppercase;
-    padding-top: 20px;
-    min-height: 0px;
+  color: #94907a;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  padding-bottom: 16px;
+  text-transform: uppercase;
+  padding-top: 32px;
+  min-height: 0px;
 }
 
-.item.item-divider.is-today {
+.item.item-divider .is-today {
   color: #5d5a4b;
   font-weight: 700;
 }
 
+.item.item-divider .is-today > span {
+  background-color: #e9e1b1;
+  border-radius: 2px;
+  color: #a39d7b;
+  margin-left: 10px;
+  padding: 4px 6px 2px;
+}
+
 ul.meal-items {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.5;
   list-style: disc outside;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 16px;
   padding-left: 6px;
 }
 
@@ -261,9 +244,7 @@ img.welcome-logo {
     display: block;
     margin: 30px auto;
 }
-.button.button-assertive {
-    box-shadow: 2px 2px 1px #7e1713;
-}
+
 p.password-help {
     margin: 20px 0 10px;
     text-align: center;
@@ -316,32 +297,37 @@ p.password-help a {
 .error-message a.button + a.button {
   margin-left: 10px;
 }
-.alert.alert-warning.pending-warning-meal {
-  margin-top: 30px;
-  font-size: 23px;
+
+.alert {
+  font-size: 26px;
   font-weight: 700;
-  line-height: 25px;
+  line-height: 1.5;
 }
-.alert.alert-warning {
-  color: #2b8838;
+
+.alert-info { color: #18a4d4 }
+.alert-success {color: #2b8838 }
+
+.late-plate-status {
+  margin-top: 60px;
 }
-.pending-warning-meal small {
-    display: block;
-	 font-size:60%
+
+.late-plate-status small {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
 }
-.pending-warning-meal .icon {
-    font-size: 47px;
-    float: left;
-    margin-right: 15px;
+
+.late-plate-status .icon {
+  float: left;
+  font-size: 58px;
+  margin: 4px 15px 0 1px;
 }
-.alert.alert-warning.meal-complete {
-    color: #e03730;
-}
+
 .no-items-icon {
-    font-size: 60px;
-    display: block;
-    padding: 30px;
-    text-shadow: 2px 2px 0px #444;
+  font-size: 60px;
+  display: block;
+  padding: 30px;
+  text-shadow: 2px 2px 0px #444;
 }
 
 span.back-text {
@@ -389,13 +375,61 @@ ion-view.pane::before {
 }
 
 
+.button-late-plate {
+  background-color: #ccc;
+  box-shadow: 2px 2px 1px rgba(0,0,0,.5);
+  color: #444;
+  font-size: 21px;
+  margin-top: 45px;
+  padding: 16px 8px;
+  width: 100%;
+}
 
+.button-late-plate + .button-late-plate {
+  margin-top: 15px;
+}
 
+.button-late-plate.activated {
+  border-color: transparent;
+  background-color: #bfbfbf;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,.5), inset 0 1px 2px 0 rgba(0,0,0,0.8);
+  color: #333;
+}
+
+.button-late-plate.is-primary {
+  background-color: #ef473a;
+  box-shadow: 2px 2px 1px #751d15;
+  color: #faf8ed;
+}
+
+.button-late-plate.is-primary:hover {
+  color: #fff;
+}
+
+.button-late-plate.is-primary.activated {
+  background-color: #e03730;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.8), inset 0 1px 2px 0 rgba(117,29,21,0.9);
+  color: #fff;
+}
+
+.button-late-plate.is-cancel {}
+
+.button-late-plate.is-cancel.activated {}
+
+.late-plate-message .icon {
+  margin-right: 3px;
+  position: relative;
+  top: 1px;
+}
 
 .late-plate-message {
   font-size: 13px;
   font-weight: 500;
   line-height: 1;
+}
+
+.button + .late-plate-message {
+  margin-top: 15px;
 }
 
 .late-plate-message .has-expired {
@@ -406,19 +440,16 @@ ion-view.pane::before {
   color: #ef473a;
 }
 
-.late-plate-message .is-requested {
-  color: #999;
+/* modifier class preceeds because it's assigned to the entire item */
+.is-pending .late-plate-message {
+  color: #18a4d4;
 }
 
-.late-plate-message .is-complete {
-  color: #33cd5f;
+/* modifier class preceeds because it's assigned to the entire item */
+.is-complete .late-plate-message {
+  color: #2b8838;
 }
 
-.late-plate-message .icon {
-  margin-right: 3px;
-  position: relative;
-  top: 1px;
-}
 
 
 
@@ -429,7 +460,7 @@ ion-view.pane::before {
   padding: 16px !important;
 }
 
-.tab-menu .item-meal-icon {
+.tab-menu .item-meal-image {
   width: 48px;
   height: 48px;
 }
@@ -458,6 +489,8 @@ ion-view.pane::before {
 }
 
 .tab-menu .icon {
+  align-items: center;
+  display: flex;
   position: relative;
   height: auto;
   padding: 0;
@@ -465,4 +498,18 @@ ion-view.pane::before {
 
 .tab-menu .icon::before {
   width: auto;
+}
+
+.tab-menu .is-pending .icon {
+  color: #18a4d4;
+}
+
+.tab-menu .is-complete .icon {
+  color: #2b8838;
+}
+
+.tab-menu .is-pending .icon,
+.tab-menu .is-complete .icon {
+  font-size: 28px;
+  margin-right: -8px;
 }

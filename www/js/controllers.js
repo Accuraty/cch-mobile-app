@@ -1,6 +1,17 @@
 angular.module('collegeChefs.controllers', ['ionic.cloud'])
 
+.run(['$rootScope',
+      '$location',
+      '$anchorScroll',
+      function($rootScope, $location, $anchorScroll) {
+        $anchorScroll.yOffset = 50;
 
+        $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+          // $anchorScroll.yOffset = -30;
+          if ($location.has()) $anchorScroll();
+          console.log('scroll?????');
+        });
+}])
 
 
 /*********** Meals / Menus ***********/
@@ -102,6 +113,18 @@ angular.module('collegeChefs.controllers', ['ionic.cloud'])
 
   $scope.getLatePlateMsg = function(mealType, mealIsToday, showIcon) {
     return Menus.getLatePlateMsg(mealType, mealIsToday, showIcon);
+  };
+
+  $scope.latePlateStatus = function(mealId) {
+    xxx;
+  };
+
+  $scope.scrollTo = function(id) {
+    var old = $location.hash();
+    $location.hash(id);
+    $anchorScroll();
+    // reset to old to keep additional routing logic from kicking in
+    $location.hash(old);
   };
 
   // Next meal
