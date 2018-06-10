@@ -285,7 +285,7 @@ angular.module('collegeChefs.services', ['ionic.cloud'])
       if (this.mealIsToday(mealDate)) {
 
         if (!this.latePlateDeadlineHasPassed(mealType, mealDate)) {
-           var icon = showIcon ? "<i class='icon icon-clock'></i> " : "";
+          var icon = showIcon ? "<i class='icon icon-clock'></i> " : "";
           var latePlateString = "Late Plate orders due by ";
 
           var lunchEnd = latePlateLunchTime + " a.m. today!";
