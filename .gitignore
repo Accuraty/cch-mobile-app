@@ -19,6 +19,7 @@ tmp/
 temp/
 hooks/
 www/lib/
+!www/lib/ionic.cloud.min.js
 platforms/
 plugins/
 plugins/android.json
